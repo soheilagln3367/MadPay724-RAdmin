@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MadPay724.Data.DatabaseContext;
+using MadPay724.Data.Infrastucturs;
+using MadPay724.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -16,23 +19,43 @@ namespace MadPay724.Presentation.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly IUnitOfWork<MadPayDbContext> _db;
+        public WeatherForecastController(IUnitOfWork<MadPayDbContext> dbContext)
         {
-            _logger = logger;
+            _db = dbContext;
         }
+       
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<string>>> Get()
+        {
+            //var user = new User()
+            //{
+            //    Address = "",
+            //    City = "",
+            //    DateOfBirth = "",
+            //    IsActive = true,
+            //    Name = "",
+            //    PasswordHash = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, },
+            //    PasswordSalt = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, },
 
-        [HttpGet ("{id}")]
+            //    PhonNumber = "",
+            //    Status = true,
+            //    UserName = ""
+            //};
+            //await _db.UserRepository.InsertAsync(user);
+            //await _db.SaveAsync();
+            //var model = await _db.UserRepository.GetAllAsync();
+
+
+            return Ok("asdaf");
+        }
+        [HttpGet("{id}")]
         public async Task<ActionResult<string>> Get(int id)
         {
             return "value";
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+
         [HttpPost]
         public async Task<string> Post([FromBody] string vlaue)
         {

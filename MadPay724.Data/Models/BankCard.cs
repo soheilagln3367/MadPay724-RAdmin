@@ -15,7 +15,7 @@ namespace MadPay724.Data.Models
         }
         [Required]
         public string BankName { get; set; }
-        public string Sahba { get; set; }
+        public string Shaba { get; set; }
         [Required]
         [Range(16,16)]
         public string CardNumber { get; set; }
@@ -24,11 +24,10 @@ namespace MadPay724.Data.Models
         public string ExpirDateMounth { get; set; }
         [Required]
         [StringLength(2, MinimumLength = 2)]
-        public string ExpirDateYear { get; set; }
+        public string ExpireDateYear { get; set; }
 
         [Required]
         public string UserId { get; set; }
         public User user { get; set; }
     }
-}
 }
