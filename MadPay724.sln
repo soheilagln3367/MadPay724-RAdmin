@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MadPay724.Data", "MadPay724
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MadPay724.Comman", "MadPay724.Comman\MadPay724.Comman.csproj", "{8F68C1A2-C5A3-45DB-9F08-7DAB4BC53E34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MadPay724.Repository", "MadPay724.Repository\MadPay724.Repository.csproj", "{49CE03AA-BBB3-412B-B059-21FF0E28EC19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MadPay724.Repo", "MadPay724.Repository\MadPay724.Repo.csproj", "{49CE03AA-BBB3-412B-B059-21FF0E28EC19}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MadPay724.Services", "MadPay724.Services\MadPay724.Services.csproj", "{89E08323-CB21-48C6-81C3-315D50ACF017}"
 EndProject

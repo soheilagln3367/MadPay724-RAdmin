@@ -6,5 +6,16 @@
   <ItemGroup>
     <ProjectReference Include="../MadPay724.Services/MadPay724.Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Api\" />
+    <Folder Include="Controllers\Site\App\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>

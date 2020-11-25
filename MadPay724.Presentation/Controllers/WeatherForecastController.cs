@@ -3,73 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MadPay724.Data.DatabaseContext;
-using MadPay724.Data.Infrastucturs;
+using MadPay724.Data.Dtos.Site.Admin;
 using MadPay724.Data.Models;
+using MadPay724.Repo.Infrastucturs;
+using MadPay724.Services.Site.Admin.Auth.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebApplication1;
 
-namespace MadPay724.Presentation.Controllers
+namespace WebApplication2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+       
 
         private readonly IUnitOfWork<MadPayDbContext> _db;
-        public WeatherForecastController(IUnitOfWork<MadPayDbContext> dbContext)
+        private readonly IAuthService _authservice;
+        public WeatherForecastController(IUnitOfWork<MadPayDbContext> dbContext, IAuthService authservice)
         {
             _db = dbContext;
-        }
-       
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> Get()
-        {
-            //var user = new User()
-            //{
-            //    Address = "",
-            //    City = "",
-            //    DateOfBirth = "",
-            //    IsActive = true,
-            //    Name = "",
-            //    PasswordHash = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, },
-            //    PasswordSalt = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, },
-
-            //    PhonNumber = "",
-            //    Status = true,
-            //    UserName = ""
-            //};
-            //await _db.UserRepository.InsertAsync(user);
-            //await _db.SaveAsync();
-            //var model = await _db.UserRepository.GetAllAsync();
-
-
-            return Ok("asdaf");
-        }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<string>> Get(int id)
-        {
-            return "value";
+            _authservice = authservice;
         }
 
-        [HttpPost]
-        public async Task<string> Post([FromBody] string vlaue)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            return null;
-        }
-        [HttpPut ("{id}")]
-        async Task<string> Put(int id, [FromBody] string vlaue)
-        {
-            return null;
-        }
-        [HttpDelete("{id}")]
-        async Task<string> Delete(int id)
-        {
-            return null;
+            userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
+            if (await _db.UserRepository.UserExists(userForRegisterDto.UserName))
+                return BadRequest("این نام کاریری وجود دارد");
+
+            var UserToCreat = new User
+            {
+                UserName = userForRegisterDto.UserName,
+                Name = userForRegisterDto.Name,
+                PhonNumber = userForRegisterDto.PhonNumber,
+                Address = "",
+                City = "",
+                Gender = true,
+                DateOfBirth = DateTime.Now,
+                IsActive = true,
+                Status = true,
+            };
+            var CreatUser = await _authservice.Register(UserToCreat, userForRegisterDto.Password);
+
+            return StatusCode(201);
+
         }
     }
 }

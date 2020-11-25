@@ -5,6 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../MadPay724.Repository/MadPay724.Repository.csproj" />
+    <ProjectReference Include="..\MadPay724.Repository\MadPay724.Repo.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Api\" />
+    <Folder Include="Site\App\" />
   </ItemGroup>
 </Project>
